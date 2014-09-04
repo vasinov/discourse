@@ -81,6 +81,14 @@ class ScreenedIpAddress < ActiveRecord::Base
     b.record_match! if b
     !!b and b.action_type == action_type
   end
+
+  def self.block_login?(user, ip_address)
+    return false if user.nil?
+    return false if !user.admin?
+    return false if ScreenedIpAddress.where(action_type: actions[:allow_admin]).count == 0
+    return true if ip_address.nil?
+    !exists_for_ip_address_and_action?(ip_address, actions[:allow_admin])
+  end
 end
 
 # == Schema Information
