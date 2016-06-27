@@ -1,2 +1,2 @@
 brakeman:
-  123
+  enabled: false
