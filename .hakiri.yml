@@ -1,2 +1,2 @@
 brakeman:
-  enabled: false
+  enabled: true
